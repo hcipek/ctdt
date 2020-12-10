@@ -16,4 +16,8 @@ public class NationType extends Type {
 	@OneToOne
 	@JoinColumn(name="category_type_id")
 	private CategoryType categoryType;
+	
+	@OneToOne
+	@JoinColumn(name="region_type_id")
+	private RegionType regionType;
 }

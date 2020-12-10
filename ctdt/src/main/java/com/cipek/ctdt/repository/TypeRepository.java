@@ -8,6 +8,7 @@ import com.cipek.ctdt.model.type.Type;
 @Repository
 public interface TypeRepository extends JpaRepository<Type, Long> {
 	
-	
+	Type findByName(String name);
+	Type findByNameContainingIgnoreCase(String name);
 
 }

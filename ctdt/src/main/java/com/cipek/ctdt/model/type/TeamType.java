@@ -4,9 +4,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import com.cipek.ctdt.model.base.BaseType;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -15,7 +15,7 @@ import lombok.Setter;
 public abstract class BaseModel {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
@@ -23,7 +23,11 @@ public abstract class BaseModel {
     @Column(name = "version", nullable = false)
     private int version;
     
-    @Column(name = "name", updatable = false, nullable = false)
+    @Column(name = "name", updatable = false, nullable = false, unique = true)
     private String name;
+    
+    public BaseModel() {
+    	
+    }
 
 }
