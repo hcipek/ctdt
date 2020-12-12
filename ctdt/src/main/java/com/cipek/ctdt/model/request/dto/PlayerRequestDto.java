@@ -8,6 +8,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PlayerRequestDto {
 	
+	private String color;
 	private String name;
 	private String title;
 	private String playerNationName;

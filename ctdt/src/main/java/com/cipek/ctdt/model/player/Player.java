@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import com.cipek.ctdt.model.base.BaseModel;
 import com.cipek.ctdt.model.relation.SkillCard;
 import com.cipek.ctdt.model.skill.TeamSkill;
+import com.cipek.ctdt.model.type.ColorType;
 import com.cipek.ctdt.model.type.NationType;
 import com.cipek.ctdt.model.type.TeamType;
 
@@ -20,6 +21,10 @@ import lombok.Setter;
 @Getter @Setter
 @Table(name = "player")
 public class Player extends BaseModel {
+	
+	@OneToOne
+	@JoinColumn(name="color_type_id")
+	private ColorType colorType;
 	
 	@OneToOne
 	@JoinColumn(name="nation_type_id")

@@ -18,6 +18,8 @@ public class StatCardDto {
 	private Integer spe_;
 	private Integer pow_;
 	private Integer tec_;
+	private String low_;
+	private String hig_;
 	
 	public StatCardDto() {
 		
