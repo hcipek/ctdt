@@ -23,4 +23,3 @@ In that project, Im planning to visualize the results of TeamBuilderProject. Tha
 
 First 2 steps will be easier ones.
 3rd one requires good algorithm to build best team possible by given filters and requirements.
-Last step is more like 
