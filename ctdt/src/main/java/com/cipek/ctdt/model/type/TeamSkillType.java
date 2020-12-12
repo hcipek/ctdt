@@ -6,5 +6,5 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("team_skill_type")
 public class TeamSkillType extends Type {
-
+	
 }
