@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import com.cipek.ctdt.exception.BaseException;
 import com.cipek.ctdt.model.response.RestCountriesResponse;
 import com.cipek.ctdt.model.type.CategoryType;
 import com.cipek.ctdt.model.type.NationType;
@@ -27,15 +28,16 @@ public class CountryService {
 	private static String NON_JAPANESE = "Non-Japanese";
 	
 	@Autowired
-	private TypeRepository typeRepo;
+	private TypeService typeService;
 	
 	private String restCountriesRequestBaseURL = "https://restcountries.eu/rest/v2/";
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	
 	@Transactional(propagation = Propagation.REQUIRED)
-	public NationType getCountryDetailsByCountryName(String name) {
-		
+	public NationType getCountryDetailsByCountryName(String name, Integer code) {
+		if(typeService.existsByName(name)) 
+			throw new BaseException("This type already exist");
 		log.debug("");
 		String tempName = nameSwitcher(name);
 		String url = restCountriesRequestBaseURL.concat("name/").concat(tempName);
@@ -47,15 +49,16 @@ public class CountryService {
 			
 			String regionName = resp.getRegion().endsWith(A) ? resp.getRegion().concat(N) : resp.getRegion().concat(AN);
 			regionName = regionName.contains(AMERICAN) ? LATIN_AMERICAN : regionName;
-			RegionType regionType = (RegionType)typeRepo.findByName(regionName);
+			RegionType regionType = typeService.getByName(RegionType.class, regionName);
 			
 			String categoryName = resp.getDemonym().equals(JAPANESE) ? resp.getDemonym() : NON_JAPANESE;
-			CategoryType categoryType = (CategoryType)typeRepo.findByName(categoryName);
+			CategoryType categoryType = typeService.getByName(CategoryType.class, categoryName);
 			
 			type.setCategoryType(categoryType);
 			type.setRegionType(regionType);
 			type.setName(name);
-			return typeRepo.save(type);
+			type.setCode(code);
+			return typeService.saveChild(NationType.class, type);
 		}
 		
 		return null;
