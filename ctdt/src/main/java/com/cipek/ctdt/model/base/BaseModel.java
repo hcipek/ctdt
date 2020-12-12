@@ -23,7 +23,7 @@ public abstract class BaseModel {
     @Column(name = "version", nullable = false)
     private int version;
     
-    @Column(name = "name", updatable = false, nullable = false, unique = true)
+    @Column(name = "name", updatable = false, nullable = false, unique = false)
     private String name;
     
     public BaseModel() {
